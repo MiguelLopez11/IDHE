@@ -1,13 +1,8 @@
 <template>
-<div>
-  <Layout>
-    <RouterView>
-      
-    </RouterView>
-  </Layout>
-</div>
+ <main class="min-h-screen bg-white">
+    <router-view />
+  </main>
 </template>
 <script setup>
-import Home from './components/HelloWorld.vue';
-import Layout from './components/Layout.vue';
+import Layout from './components/AppLayout.vue';
 </script>
