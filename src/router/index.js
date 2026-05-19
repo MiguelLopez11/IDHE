@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import PublicLayout from '@/layouts/PublicLayout.vue'
-import AppLayout from '@/layouts/AppLayout.vue'
+import PublicLayout from '../components/PublicLayout.vue'
+import AppLayout from '../components/AppLayout.vue'
 
-import Landing from '@/pages/Landing.vue'
-import Login from '@/pages/Login.vue'
-import Dashboard from '@/pages/Dashboard.vue'
+import Landing from '../components/LadingPage.vue'
+import Login from '../components/Login.vue'
+import path from 'path'
+// import Dashboard from '@/pages/Dashboard.vue'
 
 const routes = [
   {
@@ -17,25 +18,14 @@ const routes = [
         name: 'landing',
         component: Landing,
       },
-      {
-        path: 'login',
-        name: 'login',
-        component: Login,
-      },
     ],
   },
-
+  { path: '/Login', component: () => import('../components/Login.vue') },
+  { path: '/Register', component: () => import('../components/Register.vue') },
+  { path: '/Students', component: () => import('../Views/Students/StudentList.vue') },
   {
     path: '/app',
     component: AppLayout,
-    meta: { requiresAuth: true },
-    children: [
-      {
-        path: 'dashboard',
-        name: 'dashboard',
-        component: Dashboard,
-      },
-    ],
   },
 ]
 

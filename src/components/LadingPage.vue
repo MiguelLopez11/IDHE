@@ -20,14 +20,14 @@
         <div class="flex items-center gap-2">
           <!-- Botón Iniciar sesión -->
           <button 
-            @click="showLoginModal = true"
+            @click="$router.push('/Login')"
             class="hidden sm:flex px-4 py-2 text-sm font-semibold border border-zinc-300 dark:border-zinc-700 rounded-3xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors whitespace-nowrap">
             Iniciar sesión
           </button>
           
           <!-- Botón Registrarse (siempre visible) -->
           <button 
-            @click="showRegisterModal = true"
+            @click="$router.push('/Register')"
             class="px-5 py-2 text-sm font-semibold bg-violet-600 text-white rounded-3xl hover:bg-violet-700 transition-colors whitespace-nowrap">
             Registrarse gratis
           </button>
@@ -48,11 +48,11 @@
         <a href="#como-funciona" @click="mobileMenuOpen = false" class="py-3">Cómo funciona</a>
         <a href="#galeria" @click="mobileMenuOpen = false" class="py-3">Galería</a>
         <div class="pt-4 border-t flex flex-col gap-3">
-          <button @click="showLoginModal = true; mobileMenuOpen = false" 
+          <button @click="$router.push('/Login');" 
                   class="w-full py-4 text-center border border-zinc-300 dark:border-zinc-700 rounded-3xl font-semibold">
             Iniciar sesión
           </button>
-          <button @click="showRegisterModal = true; mobileMenuOpen = false" 
+          <button @click="$router.push('/Register')";  
                   class="w-full py-4 text-center bg-violet-600 text-white rounded-3xl font-semibold">
             Registrarse gratis
           </button>
@@ -154,28 +154,6 @@
         class="px-12 py-5 bg-white text-violet-700 font-bold text-xl rounded-3xl hover:scale-105 transition-transform">
         Crear cuenta gratis →
       </button>
-    </div>
-
-    <!-- Modales (sin cambios, solo más compactos) -->
-    <div v-if="showLoginModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-[100] p-4" @click.self="showLoginModal = false">
-      <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 w-full max-w-md">
-        <h4 class="text-2xl font-bold mb-6">Iniciar sesión</h4>
-        <input v-model="email" type="email" placeholder="Correo electrónico" class="w-full px-5 py-4 rounded-2xl border mb-4 dark:bg-zinc-900">
-        <input v-model="password" type="password" placeholder="Contraseña" class="w-full px-5 py-4 rounded-2xl border mb-6 dark:bg-zinc-900">
-        <button @click="fakeLogin" class="w-full py-4 bg-violet-600 text-white font-semibold rounded-2xl">Entrar</button>
-        <p class="text-center text-sm text-zinc-500 mt-6">¿No tienes cuenta? <span @click="switchToRegister" class="text-violet-600 cursor-pointer">Regístrate aquí</span></p>
-      </div>
-    </div>
-
-    <div v-if="showRegisterModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-[100] p-4" @click.self="showRegisterModal = false">
-      <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 w-full max-w-md">
-        <h4 class="text-2xl font-bold mb-6">Crear cuenta gratis</h4>
-        <input v-model="name" type="text" placeholder="Nombre completo" class="w-full px-5 py-4 rounded-2xl border mb-4 dark:bg-zinc-900">
-        <input v-model="email" type="email" placeholder="Correo escolar" class="w-full px-5 py-4 rounded-2xl border mb-4 dark:bg-zinc-900">
-        <input v-model="password" type="password" placeholder="Contraseña" class="w-full px-5 py-4 rounded-2xl border mb-6 dark:bg-zinc-900">
-        <button @click="fakeRegister" class="w-full py-4 bg-violet-600 text-white font-semibold rounded-2xl">Registrarme</button>
-        <p class="text-center text-sm text-zinc-500 mt-6">¿Ya tienes cuenta? <span @click="switchToLogin" class="text-violet-600 cursor-pointer">Inicia sesión</span></p>
-      </div>
     </div>
   </div>
 </template>
