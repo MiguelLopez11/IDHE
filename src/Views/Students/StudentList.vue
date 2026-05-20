@@ -13,7 +13,6 @@
       </button>
     </div>
 
-    <!-- Tabla -->
     <div class="bg-white rounded-3xl shadow overflow-hidden">
       <table class="w-full">
         <thead class="bg-gray-50">
@@ -22,26 +21,34 @@
             <th class="px-6 py-4 text-left">Correo</th>
             <th class="px-6 py-4 text-left">Edad</th>
             <th class="px-6 py-4 text-left">Grado</th>
-            <th class="px-6 py-4 text-center">Acciones</th>
+            <th class="px-6 py-4 text-center w-32">Acciones</th>
           </tr>
         </thead>
-        <tbody class="divide-y">
-          <tr v-for="student in students" :key="student.id" class="hover:bg-gray-50">
+        <tbody class="divide-y divide-gray-100">
+          <tr 
+            v-for="student in students" 
+            :key="student.id" 
+            class="hover:bg-gray-50 transition-colors"
+          >
             <td class="px-6 py-5 font-medium">{{ student.name }} {{ student.lastName }}</td>
             <td class="px-6 py-5 text-gray-600">{{ student.email }}</td>
             <td class="px-6 py-5 text-gray-600">{{ student.age }} años</td>
             <td class="px-6 py-5">
-              <span class="px-4 py-1 bg-violet-100 text-violet-700 rounded-full text-sm">
+              <span class="px-4 py-1.5 bg-violet-100 text-violet-700 rounded-full text-sm font-medium">
                 {{ student.grade }}
               </span>
             </td>
             <td class="px-6 py-5 text-center space-x-4">
-              <button @click="editStudent(student)" class="text-indigo-600 hover:text-indigo-800">✏️</button>
-              <button @click="deleteStudent(student.id)" class="text-red-600 hover:text-red-800">🗑️</button>
+              <button @click="editStudent(student)" class="text-indigo-600 hover:text-indigo-800 text-xl">✏️</button>
+              <button @click="deleteStudent(student.id)" class="text-red-600 hover:text-red-800 text-xl">🗑️</button>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <div v-if="students.length === 0" class="py-24 text-center text-gray-500">
+        No hay alumnos registrados
+      </div>
     </div>
   </div>
 
@@ -54,12 +61,12 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useStudentsStore } from '../../stores/students.js'
+import { useStudentsStore } from '../../stores/students'
 import StudentModal from './StudentModal.vue'
 
 const store = useStudentsStore()
 
-const students = store.students // Referencia reactiva
+const students = store.students
 const showModal = ref(false)
 const selectedStudent = ref(null)
 
@@ -82,7 +89,7 @@ const saveStudent = (studentData) => {
 }
 
 const deleteStudent = (id) => {
-  if (confirm('¿Eliminar este alumno?')) {
+  if (confirm('¿Estás seguro de eliminar este alumno?')) {
     store.deleteStudent(id)
   }
 }
