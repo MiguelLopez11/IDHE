@@ -6,7 +6,6 @@ import AppLayout from '../components/AppLayout.vue'
 import Landing from '../components/LadingPage.vue'
 import Login from '../components/Login.vue'
 import path from 'path'
-// import Dashboard from '@/pages/Dashboard.vue'
 
 const routes = [
   {
@@ -20,12 +19,14 @@ const routes = [
       },
     ],
   },
-  { path: '/Login', component: () => import('../components/Login.vue') },
-  { path: '/Register', component: () => import('../components/Register.vue') },
-  { path: '/Students', component: () => import('../Views/Students/StudentList.vue') },
   {
-    path: '/app',
+    path: '/',
     component: AppLayout,
+    children: [
+      { path: '/Login', component: () => import('../components/Login.vue') },
+      { path: '/Register', component: () => import('../components/Register.vue') },
+      { path: '/Students', component: () => import('../Views/Students/StudentList.vue') },
+    ],
   },
 ]
 
