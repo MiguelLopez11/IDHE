@@ -17,15 +17,17 @@ const routes = [
         name: 'landing',
         component: Landing,
       },
+      { path: '/Login', component: () => import('../components/Login.vue') },
+      { path: '/Register', component: () => import('../components/Register.vue') },
     ],
   },
   {
     path: '/',
     component: AppLayout,
     children: [
-      { path: '/Login', component: () => import('../components/Login.vue') },
-      { path: '/Register', component: () => import('../components/Register.vue') },
       { path: '/Students', component: () => import('../Views/Students/StudentList.vue') },
+      { path: '/Home', component: () => import('../Views/Home/Home.vue') },
+      { path: '/Teachers', component: () => import('../Views/Teachers/TeachersList.vue') },
     ],
   },
 ]
