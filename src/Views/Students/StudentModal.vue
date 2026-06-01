@@ -1,19 +1,16 @@
 <template>
-  <BaseModal
-    :modelValue="modelValue"
-    @update:modelValue="$emit('update:modelValue', $event)"
-    :title="isEdit ? 'Editar Alumno' : 'Nuevo Alumno'"
-    @confirm="handleSubmit"
-    :loading="loading"
-  >
+  <BaseModal :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)"
+    :title="isEdit ? 'Editar Alumno' : 'Nuevo Alumno'" @confirm="handleSubmit" :loading="loading">
     <form @submit.prevent="handleSubmit" class="space-y-6">
       <BaseInput v-model="form.name" label="Nombre(s)" required />
       <BaseInput v-model="form.lastName" label="Apellidos" required />
       <BaseInput v-model="form.email" label="Correo electrónico" type="email" required />
-      
+      <BaseInput v-model="form.grade" label="Grado" required />
+
+      <BaseInput v-model="form.group" label="Grupo" required />
+
       <div class="grid grid-cols-2 gap-4">
         <BaseInput v-model="form.age" label="Edad" type="number" required />
-        <BaseInput v-model="form.grade" label="Grado / Grupo" required />
       </div>
     </form>
   </BaseModal>

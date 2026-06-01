@@ -1,33 +1,63 @@
 <template>
   <li>
-    <router-link
-      :to="item.route"
-      class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200"
-      :class="{
-        'bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400': isActive,
-        'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300': !isActive
-      }"
+
+    <button
+      v-if="item.children"
+      @click="toggleMenu"
+      class="w-full flex justify-between items-center px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
     >
-      <span class="text-xl w-6 flex justify-center">{{ item.icon }}</span>
+      <div class="flex items-center gap-3">
+        <span>{{ item.icon }}</span>
+        <span>{{ item.name }}</span>
+      </div>
+
+      <span>
+        {{ open ? '▼' : '▶' }}
+      </span>
+    </button>
+
+    <RouterLink
+      v-else
+      :to="item.route"
+      class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
+    >
+      <span>{{ item.icon }}</span>
       <span>{{ item.name }}</span>
-    </router-link>
+    </RouterLink>
+
+    <ul
+      v-if="item.children && open"
+      class="ml-8 mt-2 space-y-1"
+    >
+      <li
+        v-for="child in item.children"
+        :key="child.route"
+      >
+        <RouterLink
+          :to="child.route"
+          class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
+          {{ child.name }}
+        </RouterLink>
+      </li>
+    </ul>
+
   </li>
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 
-const route = useRoute()
-
-const props = defineProps({
+defineProps({
   item: {
     type: Object,
     required: true
   }
 })
 
-const isActive = computed(() => {
-  return route.name === props.item.name
-})
+const open = ref(false)
+
+const toggleMenu = () => {
+  open.value = !open.value
+}
 </script>
